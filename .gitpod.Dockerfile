@@ -1,6 +1,6 @@
 FROM gitpod/workspace-full
 
-ENV PACKAGES build-essential gcc-arm-none-eabi gdb-multiarch libpixman-1-0 libjpeg-dev
+ENV PACKAGES build-essential gcc-arm-none-eabi gdb-multiarch libpixman-1-0 libjpeg-dev libnuma-dev
 
 USER root
 
