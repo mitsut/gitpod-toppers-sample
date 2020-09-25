@@ -1,12 +1,24 @@
 FROM gitpod/workspace-full
 
+ENV PACKAGES build-essential gcc-arm-none-eabi gdb-multiarch libpixman-1-0 libjpeg-dev
+
+USER root
+
+RUN apt-get -q update \
+    && apt-get install -yq ${PACKAGES} \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 USER gitpod
 
-# Install custom tools, runtime, etc. using apt-get
-# For example, the command below would install "bastet" - a command line tetris clone:
-#
-# RUN sudo apt-get -q update && \
-#     sudo apt-get install -yq bastet && \
-#     sudo rm -rf /var/lib/apt/lists/*
-#
+RUN cd /home/gitpod \
+    && curl -L -O https://github.com/toppers/qemu_zynq/releases/download/v2.12.0-toppers/qemu-system-arm.zip \
+    && unzip qemu-system-arm.zip \
+    && mkdir -p toppers/bin
+    && chmod +x qemu-system-arm
+    && mv qemu-system-arm toppers/bin/
+    && rm qemu-system-arm.zip
+
+RUN echo 'export PATH=/home/gitpod/toppers/bin:$PATH' >>/home/gitpod/.bashrc
+
 # More information: https://www.gitpod.io/docs/config-docker/
