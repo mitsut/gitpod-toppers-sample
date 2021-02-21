@@ -50,3 +50,17 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# TOPPERS Kernel Directory
+asp3_3.6/
+gen/
+objs/
+asp.*
+asp
+cfg?_out.*
+cfg1_out
+*.timestamp
+kernel_cfg.*
+offset.h
+
+
